@@ -1,0 +1,7 @@
+root
+    level1_folder1
+        level2_folder1
+        level2_folder2
+    level1_folder2
+        level2_folder3
+            level3_folder1
