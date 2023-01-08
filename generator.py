@@ -101,8 +101,8 @@ def multi_level_folder_generator(txt_file_path):
 
             elif counter > 0: # When folder branches from the root folder into multi layer sub-folders
                 level = len(re.findall(r"\t", line))
-                if level > max_level_of_generated_folder_system:
-                    max_level_of_generated_folder_system = level
+                if (level+1) > max_level_of_generated_folder_system:
+                    max_level_of_generated_folder_system = level+1
                 folder_name = line.strip()
 
                 if level > previous_level:
@@ -129,7 +129,7 @@ def multi_level_folder_generator(txt_file_path):
                     make_folder_and_chdir_into_it(folder_name)
                     total_folders_in_generated_folder_system += 1
 
-    return max_level_of_generated_folder_system, total_folders_in_generated_folder_system
+    return total_folders_in_generated_folder_system, max_level_of_generated_folder_system
 
 def main():
     introduction_text = "python-multi-level-folder-generator\n\nThis script generates a multi-level folder system based on the contents of a text file. This script can be useful for creating and maintaining a large and complex folder system with multiple levels.\n\nGithub repo link: https://github.com/AbhashChamlingRai/python-multi-level-folder-generator\nCreated by: Abhash Rai"
