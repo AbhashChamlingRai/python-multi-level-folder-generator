@@ -39,4 +39,78 @@ def multi_level_folder_generator(txt_file_path):
         None
     """
 
-    pass
+    print() # Adding an empty line to make the output more readable
+
+    # Initialize variables to store the maximum level of the generated folder system and the total number of folders in the system
+    max_level_of_generated_folder_system = 0
+    total_folders_in_generated_folder_system = 1 # Keep 1 because root folder is considered as the first level
+
+    def make_folder_and_chdir_into_it(name):
+        '''
+        Creates a folder, gives a report on the creation of each folder, and changes the current directory into it.
+        
+        Parameters:
+            name (str): The name of the folder to be created.
+            
+        Returns:
+            None
+        '''
+        try:
+            os.mkdir(name)
+        except:
+            print(f"'{name}' is not a valid name for a folder! Change it in the 'input.txt' file.")
+        else:
+            print(f"Folder '{folder_name}' created successfully! ")
+            os.chdir(f"./{name}")
+
+    # Get the directory of the current script file
+    script_dir = os.path.dirname(os.path.realpath(__file__))
+
+    with open(txt_file_path, "r") as txt:
+
+        # Initialize variables to store the previous level and the path to the current folder
+        previous_level = 0
+        path = []
+
+        for counter, line in enumerate(txt):
+
+            if counter == 0: # When root folder is created
+                level = len(re.findall(r"\t", line))
+                previous_level = level
+                folder_name = line.strip()
+                path.append(folder_name)
+
+                make_folder_and_chdir_into_it(folder_name)
+                total_folders_in_generated_folder_system += 1
+
+            elif counter > 0: # When folder branches from the root folder into multi layer sub-folders
+                level = len(re.findall(r"\t", line))
+                if level > max_level_of_generated_folder_system:
+                    max_level_of_generated_folder_system = level
+                folder_name = line.strip()
+
+                if level > previous_level:
+                    # If the level of the current folder is greater than the previous level, create a subfolder and change the current directory into it
+                    previous_level = level
+                    path.append(folder_name)
+                    make_folder_and_chdir_into_it(folder_name)
+                    total_folders_in_generated_folder_system += 1
+
+                elif level == previous_level:
+                    # If the level of the current folder is equals to the previous level, change the current directory a level backwards. Then, create a subfolder and change the current directory into it
+                    os.chdir("../")
+                    make_folder_and_chdir_into_it(folder_name)
+                    total_folders_in_generated_folder_system += 1
+
+                elif level < previous_level:
+                    # If the level of the current folder is less than the previous level, change the current directory to the root directory and then traverse to the specified path by changing the current directory into each folder in the path, before creating the current folder as a subfolder and changing the current directory into it
+                    path = path[:level]
+                    os.chdir(script_dir)
+                    for folder in path:
+                        os.chdir(folder)
+                    previous_level = level
+                    path.append(folder_name)
+                    make_folder_and_chdir_into_it(folder_name)
+                    total_folders_in_generated_folder_system += 1
+
+    return max_level_of_generated_folder_system, total_folders_in_generated_folder_system
