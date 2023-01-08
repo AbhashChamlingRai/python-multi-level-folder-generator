@@ -92,6 +92,10 @@ def multi_level_folder_generator(txt_file_path):
                 folder_name = line.strip()
                 path.append(folder_name)
 
+                if os.path.exists(folder_name): # If a folder with root name already exists then inform user and terminalte program
+                    print(f"\nA folder with the root name '{folder_name}' already exists. Either delete it or change the root folder name in 'input.txt' file.")
+                    quit()
+
                 make_folder_and_chdir_into_it(folder_name)
                 total_folders_in_generated_folder_system += 1
 
