@@ -27,57 +27,16 @@ def input_txt_file_checker():
         print("input.txt not found!\ninput.txt is generated.\nEdit the contents of input.txt to your requirments and run generator.py again.")
         quit()
 
-def text_file_parser(txt_file_path):
+def multi_level_folder_generator(txt_file_path):
     """
-    This function parses a text file into a Python dictionary that includes the folder hierarchy.
+    This function parses a text file into a multi-layer folder system.
+    Also, prints report on the generated multi-layer folder system.
     
     Parameters:
         txt_file_path (str): The path to the text file to be parsed. The file should contain a list of folder names, each indented by a certain number of tabs to indicate the folder's level in the hierarchy.
     
     Returns:
-        dict: A dictionary that represents the folder hierarchy as described in the text file. Each key in the dictionary represents a folder and its value is a list of its subfolders.
-    
-    Example:
-        Given the following input in the text file:
-        root
-            level1_folder1
-                level2_folder1
-                level2_folder2
-            level1_folder2
-                level2_folder3
-                    level3_folder1
-        The function would return the following dictionary:
-        {
-            'root': [
-                {'level1_folder1': ['level2_folder1', 'level2_folder2']},
-                {'level1_folder2': {'level2_folder3' : 'level3_folder1'}}
-            ]
-        }
+        None
     """
 
-def multi_level_folder_generator(folder_hierarchy_dictionary):
-    """
-    This function takes a dictionary representing a folder hierarchy and converts it into a multi-level nested folder structure.
-    
-    Parameters:
-        folder_hierarchy_dictionary (dict): A dictionary that represents the folder hierarchy. Each key in the dictionary represents a folder and its value is a list of its subfolders.
-    
-    Returns:
-        None
-    
-    Example:
-        Given the following input dictionary:
-        {
-            'root': ['level1_folder1', 'level1_folder2'],
-            'level1_folder1': ['level2_folder1', 'level2_folder2'],
-            'level1_folder2': {'level2_folder3' : 'level3_folder1'}
-        }
-        The function would create the following folder structure:
-        root
-            level1_folder1
-                level2_folder1
-                level2_folder2
-            level1_folder2
-                level2_folder3
-                    level3_folder1
-    """
+    pass
