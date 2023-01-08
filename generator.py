@@ -19,7 +19,7 @@ def input_txt_file_checker():
     Returns:
         None
     """
-    print("\nChecking folder system integrity...")
+    print("Checking folder system integrity...")
     if os.path.exists("input.txt"):
         print("\nInput.txt found!")
     else:
@@ -27,19 +27,31 @@ def input_txt_file_checker():
         print("input.txt not found!\ninput.txt is generated.\nEdit the contents of input.txt to your requirments and run generator.py again.")
         quit()
 
+def generated_folder_system_report(toal_folders, total_level):
+    """
+    Prints a report on the generated folder system to the terminal.
+
+    Parameters:
+        total_folders (int): The total number of folders generated in the system.
+        total_levels (int): The total number of levels in the generated folder system.
+        
+    Returns:
+        None
+    """
+
+    report_text = f"\n- Total numbers of folders generated: {toal_folders}\n- Total numbers of levels generated: {total_level}"
+    print(report_text)
+
 def multi_level_folder_generator(txt_file_path):
     """
     This function parses a text file into a multi-layer folder system.
-    Also, prints report on the generated multi-layer folder system.
     
     Parameters:
         txt_file_path (str): The path to the text file to be parsed. The file should contain a list of folder names, each indented by a certain number of tabs to indicate the folder's level in the hierarchy.
     
     Returns:
-        None
+        tuple: A tuple containing two integers, the maximum level of the generated folder system, and the total number of folders in the system.
     """
-
-    print() # Adding an empty line to make the output more readable
 
     # Initialize variables to store the maximum level of the generated folder system and the total number of folders in the system
     max_level_of_generated_folder_system = 0
@@ -114,3 +126,17 @@ def multi_level_folder_generator(txt_file_path):
                     total_folders_in_generated_folder_system += 1
 
     return max_level_of_generated_folder_system, total_folders_in_generated_folder_system
+
+def main():
+    introduction_text = "python-multi-level-folder-generator\n\nThis script generates a multi-level folder system based on the contents of a text file. This script can be useful for creating and maintaining a large and complex folder system with multiple levels.\n\nGithub repo link: https://github.com/AbhashChamlingRai/python-multi-level-folder-generator\nCreated by: Abhash Rai"
+    print("\n-----------------------------------\n") # Adding this to make the output more readable
+    print(introduction_text)
+    print("\n-----------------------------------\n") # Adding this to make the output more readable
+    print()
+    input_txt_file_checker()
+    total_folders, total_folder_levels = multi_level_folder_generator("./input.txt")
+    generated_folder_system_report(total_folders, total_folder_levels)
+    print()
+
+if __name__ == "__main__":
+    main()
