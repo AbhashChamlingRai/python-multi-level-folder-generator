@@ -27,6 +27,8 @@ root
 # How to Use
 ## Prerequisites
 - You must have Python 3 installed on your system.
+- You must have git installed on your system.
+
 ## Running the script
 1. Clone the repository **(In terminal)**:
 ~~~~
