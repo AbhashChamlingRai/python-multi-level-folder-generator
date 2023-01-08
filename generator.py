@@ -54,8 +54,8 @@ def multi_level_folder_generator(txt_file_path):
     """
 
     # Initialize variables to store the maximum level of the generated folder system and the total number of folders in the system
-    max_level_of_generated_folder_system = 0
-    total_folders_in_generated_folder_system = 1 # Keep 1 because root folder is considered as the first level
+    max_level_of_generated_folder_system = 1 # Keep 1 because root folder is considered as the first level
+    total_folders_in_generated_folder_system = 0 
 
     def make_folder_and_chdir_into_it(name):
         '''
